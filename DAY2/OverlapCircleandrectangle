@@ -1,0 +1,16 @@
+// obs1 = If the distance between this closest point and the center of the circle is less than 
+// or equal to the radius of the circle, then the circle and rectangle overlap.
+
+class Solution {
+public:
+    bool checkOverlap(int radius, int xCenter, int yCenter, int x1, int y1, int x2, int y2) {
+      int closex = max(x1 , min(xCenter , x2));
+      int closey = max(y1 , min(yCenter , y2));
+
+      int distx = xCenter - closex;
+      int disty = yCenter - closey;
+
+      return ((distx*distx + disty*disty) <= radius*radius);
+    }
+};
+
