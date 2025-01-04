@@ -1,0 +1,44 @@
+Obs1 - whenever an offer is used from amongst the ones available in the special list, we need to update the needs appropriately, such that the
+number of items in the current offer of each type are deducted from the ones in the corresponding entry in needs.
+Obs2 - an offer can be used only if the number of items, of each type, required for using the offer, is lesser than or equal to the ones available in the current needs.
+
+    map<vector<int> , int>mp;
+    int solve( vector<int>&price ,vector<vector<int>>& special, vector<int>& needs ){
+    int n = price.size();
+    int cost = INT_MAX;
+    vector<int>next = needs;
+    if(mp.find(needs) != mp.end()){
+     return mp[needs];
+    }
+    for(int i=0; i<special.size(); i++){
+      bool flag = true;
+      int total = 0;
+      for(int j=0; j<n; j++){
+        if(special[i][j] > needs[j])
+        flag = false;
+        total += (price[j]*needs[j]);
+      }
+      if(flag && total > special[i][n]){
+        for(int j=0; j<n; j++){
+         next[j] = needs[j] - special[i][j];
+        }
+        cost = min(cost , special[i][n] + solve(price , special , next));
+      }
+    }
+    if(cost == INT_MAX){
+    cost = 0;
+    for(int i = 0; i < n; i++){
+        cost += price[i]*needs[i];
+    }
+    }
+    return mp[needs] = cost;
+    }
+
+    int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
+    int cost = 0, n = price.size();
+    for(int i = 0; i < n; i++){
+        cost += (price[i]*needs[i]);
+    }
+    cost = min(cost, solve(price, special, needs));
+    return cost;  
+    }
