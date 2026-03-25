@@ -1,7 +1,7 @@
 
-Approach1 - Dikshtra Algorithm
-Instead of running Dijkstra's algorithm for every differing character, precompute the shortest path from every character to every other character. 
-This reduces the need to execute the algorithm multiple times, leveraging the fact that there are only 26 possible characters.
+// Approach1 - Dikshtra Algorithm
+// Instead of running Dijkstra's algorithm for every differing character, precompute the shortest path from every character to every other character. 
+// This reduces the need to execute the algorithm multiple times, leveraging the fact that there are only 26 possible characters.
 
     vector<long long> shortest(int start ,unordered_map<int , vector<pair<int , int>>>&adj ){
     priority_queue<pair<long long, int>, vector<pair<long long, int>>,
@@ -48,11 +48,11 @@ This reduces the need to execute the algorithm multiple times, leveraging the fa
     return totalcost;
     }
 
-Approach 2 - Floyd Warshal Algorithm
-The Floyd-Warshall algorithm works by iterating through each vertex as a potential intermediate point for all pairs of vertices. We create a matrix minCost,
-where minCost[i][j] represents the minimum cost to travel from vertex i to j. The algorithm involves three nested loops to update minCost[i][j] by considering
-whether a shorter path exists through an intermediate vertex k. After completing these iterations,
-minCost will hold the minimum costs for all character pairs.
+// Approach 2 - Floyd Warshal Algorithm
+// The Floyd-Warshall algorithm works by iterating through each vertex as a potential intermediate point for all pairs of vertices. We create a matrix minCost,
+// where minCost[i][j] represents the minimum cost to travel from vertex i to j. The algorithm involves three nested loops to update minCost[i][j] by considering
+// whether a shorter path exists through an intermediate vertex k. After completing these iterations,
+// minCost will hold the minimum costs for all character pairs.
 
    long long minimumCost(string source, string target, vector<char>& original, vector<char>& changed, vector<int>& cost) {
      vector<vector<long long>>mincost(26 , vector<long long>(26 , INT_MAX)); 
